@@ -1,6 +1,10 @@
 class PhotoController < ApplicationController
   def index 
-    pics = Unsplash::Photo.search("cats")
-    render json: pics
+    picture_info = Unsplash::Photo.search("cats")
+    picture_urls = []
+    picture_info.each do |i|
+      picture_urls.push(i.table.urls.regular)
+    end
+    render json: picture_urls
   end
 end
